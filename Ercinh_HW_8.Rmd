@@ -1,0 +1,261 @@
+---
+title: "Hazal Ercin"
+date: '`r format(Sys.time(), "%Y-%m-%d %H:%M")`'
+output: 
+    pdf_document:
+        number_sections: true
+        toc: true
+        fig_cap: yes
+        keep_tex: yes
+    html_document:
+        number_sections: false
+        self_contained: true
+        code_folding: hide
+        toc: true
+        toc_float:
+            collapsed: true
+            smooth_scroll: false
+urlcolor: blue        
+---
+<!--these following settings control width and also make a DIV tag for black outlines for figures-->
+
+<style type="text/css">
+.main-container {
+  max-width: 2400px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<style>
+.outline {
+   background-color: #000000;
+   padding:1px;
+   display: inline-block;
+}
+</style>
+
+```{r include = FALSE}
+# if the output is LaTeX, do not show code chunks (but do if html)
+if(knitr::is_latex_output()){
+  knitr::opts_chunk$set(echo=FALSE)
+}
+```
+
+## Set up the environment
+In this assignment we will use the dataset from [www.mortality.org](http://www.mortality.org). We will be utilizing the yearly mortality dataset from the United states.
+
+
+
+```{r setup, include=FALSE}
+setwd("H:/Statistics/R/502")
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(captioner)
+library(ggplot2)
+
+# captions
+library(captioner)
+table_nums <- captioner(prefix = "Table")
+figure_nums <- captioner(prefix = "Figure")
+
+# for having DIV tags
+knitr::knit_hooks$set(class = function(before, options, envir) {
+  if(before){
+    sprintf("<div class = '%s'>", options$class)
+  }else{
+    "</div>"
+  }
+})
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+```
+<!-- for a wide presentation -->
+<style type="text/css">
+.main-container {
+  max-width: 2400px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<!-- a DIV for black outline, good for figures-->
+<style>
+.outline {
+   background-color: #000000;
+   padding:1px;
+   display: inline-block;
+}
+</style>
+
+```{r}
+
+# to show a caption
+# backticks for pretty printing 
+if(knitr::is_latex_output()){
+   mycap <- sprintf("`` `r table_nums(name = 'dd', caption = 'USA deaths, 1 x 1 (first 6 records)')` ``")
+} else {
+   mycap <- "``` \x60r table_nums(name = 'dd', caption = 'USA deaths, 1 x 1 (first 6 records)')\x60 ```"
+}
+if(knitr::is_latex_output()){
+   myref <- sprintf("`` `r table_nums(name = 'dd', display = 'cite')` ``")
+} else {
+   myref <- "``` \x60r table_nums(name = 'dd', display = 'cite')\x60 ```"
+}
+
+
+```
+
+This data set contains information about the mortality in the United States since 1933. It shows the mortality of each age and differences between females and males. 
+ 
+```{r data}
+dd <- read.table("Deaths_1x1.dat", skip = 2, header = TRUE, stringsAsFactors = FALSE)
+dd$Age <- as.integer(dd$Age)
+
+# if HTML, use kableExtra
+if(knitr::is_html_output()){
+  kable(head(dd), format = "html") %>% 
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F, position = "left")
+}
+
+# otherwise just kable
+if(knitr::is_latex_output()){
+  kable(head(dd), format = "latex") %>% row_spec(0,bold=TRUE) %>% kable_styling(latex_options = "striped")
+}
+
+# backticks for pretty printing ... feh!
+if(knitr::is_latex_output()){
+   mystr <- sprintf("`` `r variable` ``")
+} else {
+   mystr <- "``` \x60r variable\x60 ```"
+}
+
+# for inline embed:
+ltu1 <- dd[1,]
+
+url <- "[link text](URL)"
+
+ str(dd)
+```
+ 
+## What does the literature say about it?
+The United States has enjoyed more than a century of nearly uninterrupted declines in mortality and rising longevity. But has it always been like this? In this RMarkdown, we will take a look at the history of the USA mortality. 
+
+Declines in American mortality can be attributed to two main scientific improvements. First,in the early part of the twentieth century, public health measures and improved nutrition led to rapid reductions in mortality caused by infectious diseases. As a result, cardiovascular disease and cancer accounted for nearly three quarters of all deaths by 1950. And second, beginning in the 1960s medical advances and changes in people’s behavior turned the tide on these diseases, and mortality improvements since then have been driven primarily by better treatment and disease management.
+
+Therefore, it would be safe to argue that there would be decreases in the death rates in the USA. Let;s look at this assumption:
+ 
+ 
+
+
+## What about the historical transformation?
+Except for a 10-year period between 1955 and 1965 when the mortality rate was essentially flat, mortality rates have declined at the relatively constant rate of approximately 1 to 2 percent per year since 1900.As can be seen from the graphy below, USA has experienced a steady decline in its mortality rates since 1960s.These mortality reductions can be associated with two more factors: the frequent conquest of cardiovascular disease in the elderly and the prevention of death caused by low birth weight in infants.
+
+
+```{r}
+age0 <- dd %>% filter(Age == 0)
+ggplot(data = age0, aes(x = Year, y = Total)) + 
+    geom_bar(stat = "identity") + 
+    ylab("Deaths") + 
+    xlab("Year between 1933 to 2017")
+
+if(knitr::is_latex_output()){
+   lstr <- "\\LaTeX{}"
+} else {
+   lstr <- "LaTeX"
+}
+```
+
+
+## Historical overview of the gender gap in U.S. mortality
+Despite the steady decline in overall mortality, differences persist between demographic and socioeconomic groups. Women live longer than men,yet gaps in life expectancy between men and women have narrowed in recent decades. According to the literatur the gender gap shrinks with age because men are more likely to die at younger ages from a variety of causes (e.g., heart disease, cirrhosis of the liver, homicide, suicide), and mortality rates between the sexes equalize in the later years.Let's see if this is true:
+
+
+```{r, echo=TRUE}
+## plot in thousands according to gender
+
+
+## plot total
+plot(dd$Year, dd$Total/1000, ylim=c(0,150), type="l",
+     xaxt="n", yaxt="n", cex.lab=1.5, font.lab=2, font.main=2,cex.main=1.5,
+     xlab="Year", ylab="Thousands",main="USA: Deaths")
+
+## x-axis, bold
+axis(side=1, at=c(seq(1940,2000,10), 2017), cex.axis=1.2, font=2 )
+## y-axis, bold
+axis(side=2, at=seq(0,150,25), labels=seq(0,150,25), las=1, cex.axis=1.2, font=2)
+
+## grid lines
+segments(x0=seq(1940, 2000, 20), x1=seq(1940, 2000, 20), y0=-10, y1=500, lty="dotted")
+segments(y0=seq(0, 3000, 50), y1=seq(0, 3000, 50), x0=-10, x1=3000, lty="dotted")
+
+## plot females
+lines(dd$Year, dd$Female/1000, col="red")
+## plot males
+#lines(dd$Year, dd$Male/1000, col="blue")
+
+legend(2000,140, legend=c("Total","Female"), lty=1, col=c("black","red"))
+
+```
+
+
+
+```{r, echo=TRUE}
+## plot in thousands according to gender
+
+
+## plot total
+plot(dd$Year, dd$Total/1000, ylim=c(0,150), type="l",
+     xaxt="n", yaxt="n", cex.lab=1.5, font.lab=2, font.main=2,cex.main=1.5,
+     xlab="Year", ylab="Thousands",main="USA: Deaths")
+
+## x-axis, bold
+axis(side=1, at=c(seq(1940,2000,10), 2017), cex.axis=1.2, font=2 )
+## y-axis, bold
+axis(side=2, at=seq(0,150,25), labels=seq(0,150,25), las=1, cex.axis=1.2, font=2)
+
+## grid lines
+segments(x0=seq(1940, 2000, 20), x1=seq(1940, 2000, 20), y0=-10, y1=500, lty="dotted")
+segments(y0=seq(0, 3000, 50), y1=seq(0, 3000, 50), x0=-10, x1=3000, lty="dotted")
+
+## plot females
+lines(dd$Year, dd$Male/1000, col="blue")
+## plot males
+#lines(dd$Year, dd$Male/1000, col="blue")
+
+legend(2000,140, legend=c("Total","Male"), lty=1, col=c("black","blue"))
+```
+
+
+
+
+Let's look at them together:
+```{r, echo=TRUE}
+
+## plot total
+plot(dd$Year, dd$Total/1000, ylim=c(0,150), type="l",
+     xaxt="n", yaxt="n", cex.lab=1.5, font.lab=2, font.main=2,cex.main=1.5,
+     xlab="Year", ylab="Thousands",main="USA: Deaths")
+
+## x-axis, bold
+axis(side=1, at=c(seq(1940,2000,10), 2017), cex.axis=1.2, font=2 )
+## y-axis, bold
+axis(side=2, at=seq(0,150,25), labels=seq(0,150,25), las=1, cex.axis=1.2, font=2)
+
+## grid lines
+segments(x0=seq(1940, 2000, 20), x1=seq(1940, 2000, 20), y0=-10, y1=500, lty="dotted")
+segments(y0=seq(0, 3000, 50), y1=seq(0, 3000, 50), x0=-10, x1=3000, lty="dotted")
+
+## plot females
+lines(dd$Year, dd$Female/1000, col="red")
+lines(dd$Year, dd$Male/1000, col="blue")
+## plot males
+#lines(dd$Year, dd$Male/1000, col="blue")
+
+legend(2000,140, legend=c("Total","Female", "Male"), lty=1, col=c("black","red", "blue"))
+
+```
+
+

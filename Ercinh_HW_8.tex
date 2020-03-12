@@ -1,0 +1,334 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Hazal Ercin},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Hazal Ercin}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2020-03-11 16:56}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{set-up-the-environment}{%
+\subsection{Set up the environment}\label{set-up-the-environment}}
+
+In this assignment we will use the dataset from
+\href{http://www.mortality.org}{www.mortality.org}. We will be utilizing
+the yearly mortality dataset from the United states.
+
+This data set contains information about the mortality in the United
+States since 1933. It shows the mortality of each age and differences
+between females and males.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r|r|r|r|r}
+\hline
+\textbf{Year} & \textbf{Age} & \textbf{Female} & \textbf{Male} & \textbf{Total}\\
+\hline
+\rowcolor{gray!6}  1933 & 0 & 52615.77 & 68438.11 & 121053.88\\
+\hline
+1933 & 1 & 8917.13 & 10329.16 & 19246.29\\
+\hline
+\rowcolor{gray!6}  1933 & 2 & 4336.92 & 5140.05 & 9476.97\\
+\hline
+1933 & 3 & 3161.59 & 3759.88 & 6921.47\\
+\hline
+\rowcolor{gray!6}  1933 & 4 & 2493.84 & 2932.59 & 5426.43\\
+\hline
+1933 & 5 & 2139.87 & 2537.53 & 4677.40\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{verbatim}
+## 'data.frame':    9435 obs. of  5 variables:
+##  $ Year  : int  1933 1933 1933 1933 1933 1933 1933 1933 1933 1933 ...
+##  $ Age   : int  0 1 2 3 4 5 6 7 8 9 ...
+##  $ Female: num  52616 8917 4337 3162 2494 ...
+##  $ Male  : num  68438 10329 5140 3760 2933 ...
+##  $ Total : num  121054 19246 9477 6921 5426 ...
+\end{verbatim}
+
+\hypertarget{what-does-the-literature-say-about-it}{%
+\subsection{What does the literature say about
+it?}\label{what-does-the-literature-say-about-it}}
+
+The United States has enjoyed more than a century of nearly
+uninterrupted declines in mortality and rising longevity. But has it
+always been like this? In this RMarkdown, we will take a look at the
+history of the USA mortality.
+
+Declines in American mortality can be attributed to two main scientific
+improvements. First,in the early part of the twentieth century, public
+health measures and improved nutrition led to rapid reductions in
+mortality caused by infectious diseases. As a result, cardiovascular
+disease and cancer accounted for nearly three quarters of all deaths by
+1950. And second, beginning in the 1960s medical advances and changes in
+people's behavior turned the tide on these diseases, and mortality
+improvements since then have been driven primarily by better treatment
+and disease management.
+
+Therefore, it would be safe to argue that there would be decreases in
+the death rates in the USA. Let;s look at this assumption:
+
+\hypertarget{what-about-the-historical-transformation}{%
+\subsection{What about the historical
+transformation?}\label{what-about-the-historical-transformation}}
+
+Except for a 10-year period between 1955 and 1965 when the mortality
+rate was essentially flat, mortality rates have declined at the
+relatively constant rate of approximately 1 to 2 percent per year since
+1900.As can be seen from the graphy below, USA has experienced a steady
+decline in its mortality rates since 1960s.These mortality reductions
+can be associated with two more factors: the frequent conquest of
+cardiovascular disease in the elderly and the prevention of death caused
+by low birth weight in infants.
+
+\includegraphics{Ercinh_HW_8_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\hypertarget{historical-overview-of-the-gender-gap-in-u.s.-mortality}{%
+\subsection{Historical overview of the gender gap in U.S.
+mortality}\label{historical-overview-of-the-gender-gap-in-u.s.-mortality}}
+
+Despite the steady decline in overall mortality, differences persist
+between demographic and socioeconomic groups. Women live longer than
+men,yet gaps in life expectancy between men and women have narrowed in
+recent decades. According to the literatur the gender gap shrinks with
+age because men are more likely to die at younger ages from a variety of
+causes (e.g., heart disease, cirrhosis of the liver, homicide, suicide),
+and mortality rates between the sexes equalize in the later years.Let's
+see if this is true:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## plot in thousands according to gender}
+
+
+\CommentTok{## plot total}
+\KeywordTok{plot}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Total}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{), }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{yaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex.lab=}\FloatTok{1.5}\NormalTok{, }\DataTypeTok{font.lab=}\DecValTok{2}\NormalTok{, }\DataTypeTok{font.main=}\DecValTok{2}\NormalTok{,}\DataTypeTok{cex.main=}\FloatTok{1.5}\NormalTok{,}
+     \DataTypeTok{xlab=}\StringTok{"Year"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Thousands"}\NormalTok{,}\DataTypeTok{main=}\StringTok{"USA: Deaths"}\NormalTok{)}
+
+\CommentTok{## x-axis, bold}
+\KeywordTok{axis}\NormalTok{(}\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{,}\DecValTok{2000}\NormalTok{,}\DecValTok{10}\NormalTok{), }\DecValTok{2017}\NormalTok{), }\DataTypeTok{cex.axis=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{font=}\DecValTok{2}\NormalTok{ )}
+\CommentTok{## y-axis, bold}
+\KeywordTok{axis}\NormalTok{(}\DataTypeTok{side=}\DecValTok{2}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{25}\NormalTok{), }\DataTypeTok{labels=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{25}\NormalTok{), }\DataTypeTok{las=}\DecValTok{1}\NormalTok{, }\DataTypeTok{cex.axis=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{font=}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{## grid lines}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0=}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{x1=}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{y0=}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DataTypeTok{y1=}\DecValTok{500}\NormalTok{, }\DataTypeTok{lty=}\StringTok{"dotted"}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{y0=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3000}\NormalTok{, }\DecValTok{50}\NormalTok{), }\DataTypeTok{y1=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3000}\NormalTok{, }\DecValTok{50}\NormalTok{), }\DataTypeTok{x0=}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DataTypeTok{x1=}\DecValTok{3000}\NormalTok{, }\DataTypeTok{lty=}\StringTok{"dotted"}\NormalTok{)}
+
+\CommentTok{## plot females}
+\KeywordTok{lines}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Female}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\CommentTok{## plot males}
+\CommentTok{#lines(dd$Year, dd$Male/1000, col="blue")}
+
+\KeywordTok{legend}\NormalTok{(}\DecValTok{2000}\NormalTok{,}\DecValTok{140}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Total"}\NormalTok{,}\StringTok{"Female"}\NormalTok{), }\DataTypeTok{lty=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"red"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ercinh_HW_8_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## plot in thousands according to gender}
+
+
+\CommentTok{## plot total}
+\KeywordTok{plot}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Total}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{), }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{yaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex.lab=}\FloatTok{1.5}\NormalTok{, }\DataTypeTok{font.lab=}\DecValTok{2}\NormalTok{, }\DataTypeTok{font.main=}\DecValTok{2}\NormalTok{,}\DataTypeTok{cex.main=}\FloatTok{1.5}\NormalTok{,}
+     \DataTypeTok{xlab=}\StringTok{"Year"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Thousands"}\NormalTok{,}\DataTypeTok{main=}\StringTok{"USA: Deaths"}\NormalTok{)}
+
+\CommentTok{## x-axis, bold}
+\KeywordTok{axis}\NormalTok{(}\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{,}\DecValTok{2000}\NormalTok{,}\DecValTok{10}\NormalTok{), }\DecValTok{2017}\NormalTok{), }\DataTypeTok{cex.axis=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{font=}\DecValTok{2}\NormalTok{ )}
+\CommentTok{## y-axis, bold}
+\KeywordTok{axis}\NormalTok{(}\DataTypeTok{side=}\DecValTok{2}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{25}\NormalTok{), }\DataTypeTok{labels=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{25}\NormalTok{), }\DataTypeTok{las=}\DecValTok{1}\NormalTok{, }\DataTypeTok{cex.axis=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{font=}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{## grid lines}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0=}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{x1=}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{y0=}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DataTypeTok{y1=}\DecValTok{500}\NormalTok{, }\DataTypeTok{lty=}\StringTok{"dotted"}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{y0=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3000}\NormalTok{, }\DecValTok{50}\NormalTok{), }\DataTypeTok{y1=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3000}\NormalTok{, }\DecValTok{50}\NormalTok{), }\DataTypeTok{x0=}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DataTypeTok{x1=}\DecValTok{3000}\NormalTok{, }\DataTypeTok{lty=}\StringTok{"dotted"}\NormalTok{)}
+
+\CommentTok{## plot females}
+\KeywordTok{lines}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Male}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\CommentTok{## plot males}
+\CommentTok{#lines(dd$Year, dd$Male/1000, col="blue")}
+
+\KeywordTok{legend}\NormalTok{(}\DecValTok{2000}\NormalTok{,}\DecValTok{140}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Total"}\NormalTok{,}\StringTok{"Male"}\NormalTok{), }\DataTypeTok{lty=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ercinh_HW_8_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+Let's look at them together:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## plot total}
+\KeywordTok{plot}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Total}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{), }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{yaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex.lab=}\FloatTok{1.5}\NormalTok{, }\DataTypeTok{font.lab=}\DecValTok{2}\NormalTok{, }\DataTypeTok{font.main=}\DecValTok{2}\NormalTok{,}\DataTypeTok{cex.main=}\FloatTok{1.5}\NormalTok{,}
+     \DataTypeTok{xlab=}\StringTok{"Year"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Thousands"}\NormalTok{,}\DataTypeTok{main=}\StringTok{"USA: Deaths"}\NormalTok{)}
+
+\CommentTok{## x-axis, bold}
+\KeywordTok{axis}\NormalTok{(}\DataTypeTok{side=}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{,}\DecValTok{2000}\NormalTok{,}\DecValTok{10}\NormalTok{), }\DecValTok{2017}\NormalTok{), }\DataTypeTok{cex.axis=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{font=}\DecValTok{2}\NormalTok{ )}
+\CommentTok{## y-axis, bold}
+\KeywordTok{axis}\NormalTok{(}\DataTypeTok{side=}\DecValTok{2}\NormalTok{, }\DataTypeTok{at=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{25}\NormalTok{), }\DataTypeTok{labels=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{25}\NormalTok{), }\DataTypeTok{las=}\DecValTok{1}\NormalTok{, }\DataTypeTok{cex.axis=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{font=}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{## grid lines}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0=}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{x1=}\KeywordTok{seq}\NormalTok{(}\DecValTok{1940}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{y0=}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DataTypeTok{y1=}\DecValTok{500}\NormalTok{, }\DataTypeTok{lty=}\StringTok{"dotted"}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{y0=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3000}\NormalTok{, }\DecValTok{50}\NormalTok{), }\DataTypeTok{y1=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3000}\NormalTok{, }\DecValTok{50}\NormalTok{), }\DataTypeTok{x0=}\OperatorTok{-}\DecValTok{10}\NormalTok{, }\DataTypeTok{x1=}\DecValTok{3000}\NormalTok{, }\DataTypeTok{lty=}\StringTok{"dotted"}\NormalTok{)}
+
+\CommentTok{## plot females}
+\KeywordTok{lines}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Female}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(dd}\OperatorTok{$}\NormalTok{Year, dd}\OperatorTok{$}\NormalTok{Male}\OperatorTok{/}\DecValTok{1000}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\CommentTok{## plot males}
+\CommentTok{#lines(dd$Year, dd$Male/1000, col="blue")}
+
+\KeywordTok{legend}\NormalTok{(}\DecValTok{2000}\NormalTok{,}\DecValTok{140}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Total"}\NormalTok{,}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{), }\DataTypeTok{lty=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ercinh_HW_8_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+
+\end{document}
